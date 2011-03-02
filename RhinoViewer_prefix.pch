@@ -1,0 +1,29 @@
+//
+// Prefix header for all source files of the 'RhinoViewer' target in the 'RhinoViewer' project
+//
+
+#include "opennurbs/opennurbs.h"
+
+#if defined(__OBJC__)
+#import <UIKit/UIKit.h>
+#endif
+
+// debugging print functions
+#ifdef __OBJC__
+NSString* w2ns(const wchar_t* inStr);
+NSString* uuid2ns(ON_UUID uuid);
+void MRLog (const char*, const char*, unsigned int, NSString*, ...);
+#endif
+void MRLog (const char*, const char*, unsigned int, const char*, ...);
+void MRLog (const char*, const char*, unsigned int, const wchar_t*, ...);
+
+#ifdef _DEBUG
+#    define DLog(s, ...) MRLog(__func__, __FILE__, __LINE__, s, ##__VA_ARGS__)
+#else
+#    define DLog(...) /* */
+#endif
+
+#ifdef __OBJC__
+// make RhinoApp, the global pointer to our singleton AppDelegate instance, available everywhere 
+#import "AppDelegate.h"
+#endif

@@ -1,0 +1,22 @@
+This directory contains a precompiled OpenNURBS static library suitable for building RhinoViewer either for the iOS simulator or an arm6 or arm7 device.  It also includes copies of the OpenNURBS include files necessary to compile RhinoViewer.
+
+This directory is provided as a convenience, and makes building RhinoViewer simpler.  You can easily replace this directory with your own copy of the OpenNURBS library.  The source for OpenNURBS is available at http://www.opennurbs.org.
+
+
+As of this writing (Feb 16, 2011), the OpenNURBS source requires one change to compile for iOS.
+
+In opennurbs_math.h, you must change
+
+#if defined(_GNU_SOURCE)
+#define ON_IS_FINITE(x) (finite(x)?true:false)
+#else
+#define ON_IS_FINITE(x) (_finite(x)?true:false)
+#endif
+
+to
+
+#if defined(_GNU_SOURCE)
+#define ON_IS_FINITE(x) (isfinite(x)?true:false)
+#else
+#define ON_IS_FINITE(x) (_finite(x)?true:false)
+#endif

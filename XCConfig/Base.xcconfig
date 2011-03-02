@@ -1,0 +1,24 @@
+ //
+ // Copyright (c) 1993-2011 Robert McNeel & Associates. All rights reserved.
+ // Rhinoceros is a registered trademark of Robert McNeel & Assoicates.
+ //
+ // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
+ // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
+ // MERCHANTABILITY ARE HEREBY DISCLAIMED.
+ //				
+ // For complete openNURBS copyright information see <http://www.opennurbs.org>.
+ //
+ ////////////////////////////////////////////////////////////////
+
+// Settings common to all goRhino builds
+
+SDKROOT = iphoneos4.2
+ARCHS = $(ARCHS_UNIVERSAL_IPHONE_OS)
+
+GCC_OBJC_CALL_CXX_CDTORS = YES;
+GCC_C_LANGUAGE_STANDARD = c99
+GCC_WARN_ABOUT_RETURN_TYPE = YES
+HEADER_SEARCH_PATHS = $(inherited) /usr/include/malloc
+OTHER_CPLUSPLUSFLAGS = $(OTHER_CFLAGS) -fno-operator-names
+PREBINDING = NO
+PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO

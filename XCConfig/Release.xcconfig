@@ -1,0 +1,21 @@
+ //
+ // Copyright (c) 1993-2011 Robert McNeel & Associates. All rights reserved.
+ // Rhinoceros is a registered trademark of Robert McNeel & Assoicates.
+ //
+ // THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY.
+ // ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF
+ // MERCHANTABILITY ARE HEREBY DISCLAIMED.
+ //				
+ // For complete openNURBS copyright information see <http://www.opennurbs.org>.
+ //
+ ////////////////////////////////////////////////////////////////
+
+// Settings for Release builds
+
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) _GNU_SOURCE MY_ZCALLOC Z_PREFIX NDEBUG=1
+GCC_OPTIMIZATION_LEVEL = s
+ONLY_ACTIVE_ARCH = NO
+STRIP_STYLE=non-global
+STRIP_INSTALLED_PRODUCT = YES
+DEPLOYMENT_POSTPROCESSING = YES

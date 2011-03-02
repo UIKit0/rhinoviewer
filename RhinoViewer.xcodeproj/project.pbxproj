@@ -1,0 +1,634 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A6D99921197CD7C001A00BF /* GradientQuad.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4A6D998E1197CD63001A00BF /* GradientQuad.fsh */; };
+		4A6D99931197CD7C001A00BF /* GradientQuad.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4A6D998F1197CD63001A00BF /* GradientQuad.vsh */; };
+		4AE46DA811930E3E00E29E87 /* AnaglyphCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4AE46DA711930E3E00E29E87 /* AnaglyphCalculator.mm */; };
+		4AE46EE71193438B00E29E87 /* RhGLShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE46EE51193438B00E29E87 /* RhGLShaderProgram.cpp */; };
+		4AE46EFE1193440D00E29E87 /* FullscreenQuad.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4AE46EF2119343F000E29E87 /* FullscreenQuad.fsh */; };
+		4AE46EFF1193440D00E29E87 /* FullscreenQuad.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4AE46EF3119343F000E29E87 /* FullscreenQuad.vsh */; };
+		4AE46F001193440D00E29E87 /* PerPixelLighting.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4AE46EF4119343F000E29E87 /* PerPixelLighting.fsh */; };
+		4AE46F011193440D00E29E87 /* PerPixelLighting.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4AE46EF5119343F000E29E87 /* PerPixelLighting.vsh */; };
+		4AE46F021193440D00E29E87 /* PerVertexLighting.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4AE46EF6119343F000E29E87 /* PerVertexLighting.fsh */; };
+		4AE46F031193440D00E29E87 /* PerVertexLighting.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4AE46EF7119343F000E29E87 /* PerVertexLighting.vsh */; };
+		DF00ABC61166933F00D23713 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF00ABC51166933F00D23713 /* CoreLocation.framework */; };
+		DF2E86511131DE1E0086CD66 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DF2E864F1131DE1E0086CD66 /* Default.png */; };
+		DF37B3BA1226F3AB00534E7D /* RhModelViewControllerPad.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFC860AB118A6A6E00E18C4C /* RhModelViewControllerPad.mm */; };
+		DF37B40C1226FB6C00534E7D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF37B40B1226FB6C00534E7D /* MainWindow.xib */; };
+		DF3AA5DE119C58B000319022 /* ClippingPlanes.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFB3F2C81157C7350009B0EA /* ClippingPlanes.mm */; };
+		DF3AA9BE119C9D5700319022 /* UIColor-RGBA.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF3AA9BD119C9D5700319022 /* UIColor-RGBA.mm */; };
+		DF3E133011F51CA400FA6FF6 /* models.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF157C5911330AEF0075F718 /* models.plist */; };
+		DF43A22711740719001F79AA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF43A22611740719001F79AA /* MessageUI.framework */; };
+		DF4E155412271756008F221E /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF4E155312271756008F221E /* MainWindow-iPad.xib */; };
+		DF509F701180B55D00546AFE /* TransparentToolbar.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF509F6F1180B55D00546AFE /* TransparentToolbar.mm */; };
+		DF58F25D1189F74900C75307 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF58F25C1189F74900C75307 /* SystemConfiguration.framework */; };
+		DF5CAB7511EE4959000EB8A1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DF5CAB7311EE4959000EB8A1 /* Default@2x.png */; };
+		DF6EF0E711550FC3006F89AA /* DisplayMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF82B56B115496F4004DB2C2 /* DisplayMesh.mm */; };
+		DF70B62F118E4F8700BA9EFE /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DF70B623118E4F7700BA9EFE /* template.vsh */; };
+		DF79F866131EA7D500F8400B /* libopennurbs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF79F865131EA7D500F8400B /* libopennurbs.a */; };
+		DF7CC17911640214008480EB /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7CC17511640214008480EB /* Default-Landscape.png */; };
+		DF7CC17A11640214008480EB /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7CC17711640214008480EB /* Default-Portrait.png */; };
+		DF82B58911549743004DB2C2 /* ONModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF82B58811549743004DB2C2 /* ONModel.mm */; };
+		DF936FFA118F21CA00E03CB6 /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DF70B622118E4F7700BA9EFE /* template.fsh */; };
+		DF9B8E0C11233D8D005FD2C5 /* Rhino Logo.3dm in Resources */ = {isa = PBXBuildFile; fileRef = DF9B8E0A11233D8D005FD2C5 /* Rhino Logo.3dm */; };
+		DF9F305C1151E63400C6890F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF9F305B1151E63400C6890F /* MediaPlayer.framework */; };
+		DFB190D6111C7917000FB988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB190D5111C7917000FB988 /* Foundation.framework */; };
+		DFB190D8111C7917000FB988 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB190D7111C7917000FB988 /* OpenGLES.framework */; };
+		DFB190DA111C7917000FB988 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB190D9111C7917000FB988 /* QuartzCore.framework */; };
+		DFB190DC111C7917000FB988 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB190DB111C7917000FB988 /* UIKit.framework */; };
+		DFB19399111C9B16000FB988 /* ES1Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFB190F0111C79D4000FB988 /* ES1Renderer.mm */; };
+		DFBA1C3D111BB34F0053495D /* RhModelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFBA1C3C111BB34F0053495D /* RhModelView.mm */; };
+		DFBA1C40111BB35C0053495D /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFBA1C3F111BB35C0053495D /* EAGLView.mm */; };
+		DFBA1C53111BB4AF0053495D /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFBA1C52111BB4AF0053495D /* AppDelegate.mm */; };
+		DFBA1C5C111BB5540053495D /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFBA1C5B111BB5540053495D /* main.mm */; };
+		DFBFBCC4130AFC8C0036686F /* RhModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFBFBCC3130AFC8C0036686F /* RhModel.mm */; };
+		DFBFBE99130B32CF0036686F /* stereo1.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBFBE93130B32CF0036686F /* stereo1.png */; };
+		DFBFBE9A130B32CF0036686F /* stereo1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBFBE94130B32CF0036686F /* stereo1@2x.png */; };
+		DFBFBE9B130B32CF0036686F /* stereo2.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBFBE95130B32CF0036686F /* stereo2.png */; };
+		DFBFBE9C130B32CF0036686F /* stereo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBFBE96130B32CF0036686F /* stereo2@2x.png */; };
+		DFBFBE9D130B32CF0036686F /* zoomExtents.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBFBE97130B32CF0036686F /* zoomExtents.png */; };
+		DFBFBE9E130B32CF0036686F /* zoomExtents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DFBFBE98130B32CF0036686F /* zoomExtents@2x.png */; };
+		DFC864AA118B429100E18C4C /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFC864A9118B429100E18C4C /* ES2Renderer.mm */; };
+		DFC864B7118B436100E18C4C /* Shaders.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFC864B5118B436100E18C4C /* Shaders.mm */; };
+		DFEEE4EB1133A4B50053659F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEEE4EA1133A4B50053659F /* CoreGraphics.framework */; };
+		DFF7B901112609A600905404 /* MRLog.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFF7B900112609A600905404 /* MRLog.mm */; };
+		DFFCA872112A0B0B00BD0C67 /* RhModelViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = DFFCA863112A0B0B00BD0C67 /* RhModelViewController.mm */; };
+		DFFCA8A6112A17A800BD0C67 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFFCA8A5112A17A800BD0C67 /* Entitlements.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4A6D998E1197CD63001A00BF /* GradientQuad.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = GradientQuad.fsh; path = Shaders/GradientQuad.fsh; sourceTree = "<group>"; };
+		4A6D998F1197CD63001A00BF /* GradientQuad.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = GradientQuad.vsh; path = Shaders/GradientQuad.vsh; sourceTree = "<group>"; };
+		4AE46DA611930E3E00E29E87 /* AnaglyphCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnaglyphCalculator.h; sourceTree = "<group>"; };
+		4AE46DA711930E3E00E29E87 /* AnaglyphCalculator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnaglyphCalculator.mm; sourceTree = "<group>"; };
+		4AE46EE51193438B00E29E87 /* RhGLShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RhGLShaderProgram.cpp; sourceTree = "<group>"; };
+		4AE46EE61193438B00E29E87 /* RhGLShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhGLShaderProgram.h; sourceTree = "<group>"; };
+		4AE46EF2119343F000E29E87 /* FullscreenQuad.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = FullscreenQuad.fsh; path = Shaders/FullscreenQuad.fsh; sourceTree = "<group>"; };
+		4AE46EF3119343F000E29E87 /* FullscreenQuad.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = FullscreenQuad.vsh; path = Shaders/FullscreenQuad.vsh; sourceTree = "<group>"; };
+		4AE46EF4119343F000E29E87 /* PerPixelLighting.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PerPixelLighting.fsh; path = Shaders/PerPixelLighting.fsh; sourceTree = "<group>"; };
+		4AE46EF5119343F000E29E87 /* PerPixelLighting.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PerPixelLighting.vsh; path = Shaders/PerPixelLighting.vsh; sourceTree = "<group>"; };
+		4AE46EF6119343F000E29E87 /* PerVertexLighting.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PerVertexLighting.fsh; path = Shaders/PerVertexLighting.fsh; sourceTree = "<group>"; };
+		4AE46EF7119343F000E29E87 /* PerVertexLighting.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PerVertexLighting.vsh; path = Shaders/PerVertexLighting.vsh; sourceTree = "<group>"; };
+		DF00ABC51166933F00D23713 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DF157C5911330AEF0075F718 /* models.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = models.plist; sourceTree = "<group>"; };
+		DF37B40B1226FB6C00534E7D /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		DF3AA9BC119C9D5700319022 /* UIColor-RGBA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-RGBA.h"; sourceTree = "<group>"; };
+		DF3AA9BD119C9D5700319022 /* UIColor-RGBA.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIColor-RGBA.mm"; sourceTree = "<group>"; };
+		DF43A22611740719001F79AA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DF4E155312271756008F221E /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		DF509F6E1180B55D00546AFE /* TransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentToolbar.h; sourceTree = "<group>"; };
+		DF509F6F1180B55D00546AFE /* TransparentToolbar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TransparentToolbar.mm; sourceTree = "<group>"; };
+		DF58F25C1189F74900C75307 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DF70B622118E4F7700BA9EFE /* template.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = template.fsh; path = Shaders/template.fsh; sourceTree = "<group>"; };
+		DF70B623118E4F7700BA9EFE /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template.vsh; path = Shaders/template.vsh; sourceTree = "<group>"; };
+		DF79F865131EA7D500F8400B /* libopennurbs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopennurbs.a; path = opennurbs/libopennurbs.a; sourceTree = "<group>"; };
+		DF82B56A115496F4004DB2C2 /* DisplayMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMesh.h; sourceTree = "<group>"; };
+		DF82B56B115496F4004DB2C2 /* DisplayMesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DisplayMesh.mm; sourceTree = "<group>"; };
+		DF82B58711549743004DB2C2 /* ONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONModel.h; sourceTree = "<group>"; };
+		DF82B58811549743004DB2C2 /* ONModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ONModel.mm; sourceTree = "<group>"; };
+		DF8968531163D65700B61D1B /* AppDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = AppDebug.xcconfig; path = XCConfig/AppDebug.xcconfig; sourceTree = "<group>"; };
+		DF8968541163D65700B61D1B /* AppRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = AppRelease.xcconfig; path = XCConfig/AppRelease.xcconfig; sourceTree = "<group>"; };
+		DF8968551163D65700B61D1B /* iPhoneOS.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = iPhoneOS.xcconfig; path = XCConfig/iPhoneOS.xcconfig; sourceTree = "<group>"; };
+		DF9B8E0A11233D8D005FD2C5 /* Rhino Logo.3dm */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rhino Logo.3dm"; path = "3DM Files/Rhino Logo.3dm"; sourceTree = "<group>"; };
+		DF9F305B1151E63400C6890F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		DFB190D5111C7917000FB988 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DFB190D7111C7917000FB988 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DFB190D9111C7917000FB988 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DFB190DB111C7917000FB988 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DFB190EF111C79D4000FB988 /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
+		DFB190F0111C79D4000FB988 /* ES1Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES1Renderer.mm; sourceTree = "<group>"; };
+		DFB190F5111C7AB0000FB988 /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		DFB3F2C71157C7350009B0EA /* ClippingPlanes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClippingPlanes.h; sourceTree = "<group>"; };
+		DFB3F2C81157C7350009B0EA /* ClippingPlanes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ClippingPlanes.mm; sourceTree = "<group>"; };
+		DFB70D211207605A00027D9E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Default-Landscape.png"; sourceTree = "<group>"; };
+		DFB70D221207605A00027D9E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Default-Portrait.png"; sourceTree = "<group>"; };
+		DFB70D231207605A00027D9E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/Default.png; sourceTree = "<group>"; };
+		DFB70D241207605A00027D9E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/Default@2x.png"; sourceTree = "<group>"; };
+		DFB70D251207605A00027D9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DFBA1C3B111BB34F0053495D /* RhModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhModelView.h; sourceTree = "<group>"; };
+		DFBA1C3C111BB34F0053495D /* RhModelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RhModelView.mm; sourceTree = "<group>"; };
+		DFBA1C3E111BB35C0053495D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		DFBA1C3F111BB35C0053495D /* EAGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLView.mm; sourceTree = "<group>"; };
+		DFBA1C51111BB4AF0053495D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DFBA1C52111BB4AF0053495D /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		DFBA1C5B111BB5540053495D /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		DFBFBCC2130AFC8C0036686F /* RhModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhModel.h; sourceTree = "<group>"; };
+		DFBFBCC3130AFC8C0036686F /* RhModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RhModel.mm; sourceTree = "<group>"; };
+		DFBFBE93130B32CF0036686F /* stereo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stereo1.png; path = Images/stereo1.png; sourceTree = "<group>"; };
+		DFBFBE94130B32CF0036686F /* stereo1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stereo1@2x.png"; path = "Images/stereo1@2x.png"; sourceTree = "<group>"; };
+		DFBFBE95130B32CF0036686F /* stereo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stereo2.png; path = Images/stereo2.png; sourceTree = "<group>"; };
+		DFBFBE96130B32CF0036686F /* stereo2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stereo2@2x.png"; path = "Images/stereo2@2x.png"; sourceTree = "<group>"; };
+		DFBFBE97130B32CF0036686F /* zoomExtents.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zoomExtents.png; path = Images/zoomExtents.png; sourceTree = "<group>"; };
+		DFBFBE98130B32CF0036686F /* zoomExtents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zoomExtents@2x.png"; path = "Images/zoomExtents@2x.png"; sourceTree = "<group>"; };
+		DFC860AA118A6A6E00E18C4C /* RhModelViewControllerPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RhModelViewControllerPad.h; path = "View Controllers/RhModelViewControllerPad.h"; sourceTree = "<group>"; };
+		DFC860AB118A6A6E00E18C4C /* RhModelViewControllerPad.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RhModelViewControllerPad.mm; path = "View Controllers/RhModelViewControllerPad.mm"; sourceTree = "<group>"; };
+		DFC864A8118B429100E18C4C /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
+		DFC864A9118B429100E18C4C /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ES2Renderer.mm; sourceTree = "<group>"; };
+		DFC864B4118B436100E18C4C /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
+		DFC864B5118B436100E18C4C /* Shaders.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shaders.mm; sourceTree = "<group>"; };
+		DFE95BEA111A45A80014C98B /* Rhino Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rhino Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFE95BEC111A45A80014C98B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFEEE4EA1133A4B50053659F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DFF0884E1134BCD700A2C2A8 /* RhinoViewer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RhinoViewer_Prefix.pch; sourceTree = "<group>"; };
+		DFF7B900112609A600905404 /* MRLog.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MRLog.mm; sourceTree = "<group>"; };
+		DFFBA8B913045B3800F58D56 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Base.xcconfig; path = XCConfig/Base.xcconfig; sourceTree = "<group>"; };
+		DFFBA8BA13045B3800F58D56 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = XCConfig/Debug.xcconfig; sourceTree = "<group>"; };
+		DFFBA8BB13045B3800F58D56 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = XCConfig/Release.xcconfig; sourceTree = "<group>"; };
+		DFFCA862112A0B0B00BD0C67 /* RhModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RhModelViewController.h; path = "View Controllers/RhModelViewController.h"; sourceTree = "<group>"; };
+		DFFCA863112A0B0B00BD0C67 /* RhModelViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RhModelViewController.mm; path = "View Controllers/RhModelViewController.mm"; sourceTree = "<group>"; };
+		DFFCA8A5112A17A800BD0C67 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFE95BE8111A45A80014C98B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFB190D6111C7917000FB988 /* Foundation.framework in Frameworks */,
+				DFB190D8111C7917000FB988 /* OpenGLES.framework in Frameworks */,
+				DFB190DA111C7917000FB988 /* QuartzCore.framework in Frameworks */,
+				DFB190DC111C7917000FB988 /* UIKit.framework in Frameworks */,
+				DFEEE4EB1133A4B50053659F /* CoreGraphics.framework in Frameworks */,
+				DF9F305C1151E63400C6890F /* MediaPlayer.framework in Frameworks */,
+				DF00ABC61166933F00D23713 /* CoreLocation.framework in Frameworks */,
+				DF43A22711740719001F79AA /* MessageUI.framework in Frameworks */,
+				DF58F25D1189F74900C75307 /* SystemConfiguration.framework in Frameworks */,
+				DF79F866131EA7D500F8400B /* libopennurbs.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFE95BEA111A45A80014C98B /* Rhino Viewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* NURBSViewer */ = {
+			isa = PBXGroup;
+			children = (
+				DFBA1C3A111BB3350053495D /* Classes */,
+				DF3AA5CC119C577E00319022 /* OpenGL */,
+				DF3AA5B5119C56DC00319022 /* Views */,
+				DF870AB811276D6F0015E85F /* ViewControllers */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				DF7CC1521163F70D008480EB /* Resources-iPad */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = NURBSViewer;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				DFFBA8B913045B3800F58D56 /* Base.xcconfig */,
+				DFFBA8BA13045B3800F58D56 /* Debug.xcconfig */,
+				DFFBA8BB13045B3800F58D56 /* Release.xcconfig */,
+				DFF0884E1134BCD700A2C2A8 /* RhinoViewer_Prefix.pch */,
+				DF8968531163D65700B61D1B /* AppDebug.xcconfig */,
+				DF8968541163D65700B61D1B /* AppRelease.xcconfig */,
+				DF8968551163D65700B61D1B /* iPhoneOS.xcconfig */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DF37B40B1226FB6C00534E7D /* MainWindow.xib */,
+				DF70B619118E4E3100BA9EFE /* Shaders */,
+				DF7CC17511640214008480EB /* Default-Landscape.png */,
+				DF7CC17711640214008480EB /* Default-Portrait.png */,
+				DF7EB76C1153E2EF00C8C743 /* 3DM Files */,
+				DF71EF60112477D000234762 /* Images */,
+				DF2E864F1131DE1E0086CD66 /* Default.png */,
+				DF5CAB7311EE4959000EB8A1 /* Default@2x.png */,
+				DF157C5911330AEF0075F718 /* models.plist */,
+				DFFCA8A5112A17A800BD0C67 /* Entitlements.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DF79F865131EA7D500F8400B /* libopennurbs.a */,
+				DFB190D5111C7917000FB988 /* Foundation.framework */,
+				DFB190D7111C7917000FB988 /* OpenGLES.framework */,
+				DFB190D9111C7917000FB988 /* QuartzCore.framework */,
+				DFB190DB111C7917000FB988 /* UIKit.framework */,
+				DFEEE4EA1133A4B50053659F /* CoreGraphics.framework */,
+				DF9F305B1151E63400C6890F /* MediaPlayer.framework */,
+				DF43A22611740719001F79AA /* MessageUI.framework */,
+				DF00ABC51166933F00D23713 /* CoreLocation.framework */,
+				DF58F25C1189F74900C75307 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF3AA5B5119C56DC00319022 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DFB3F2C71157C7350009B0EA /* ClippingPlanes.h */,
+				DFB3F2C81157C7350009B0EA /* ClippingPlanes.mm */,
+				DFBA1C3B111BB34F0053495D /* RhModelView.h */,
+				DFBA1C3C111BB34F0053495D /* RhModelView.mm */,
+				DF509F6E1180B55D00546AFE /* TransparentToolbar.h */,
+				DF509F6F1180B55D00546AFE /* TransparentToolbar.mm */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		DF3AA5CC119C577E00319022 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				4AE46DA611930E3E00E29E87 /* AnaglyphCalculator.h */,
+				4AE46DA711930E3E00E29E87 /* AnaglyphCalculator.mm */,
+				DFBA1C3E111BB35C0053495D /* EAGLView.h */,
+				DFBA1C3F111BB35C0053495D /* EAGLView.mm */,
+				DFB190F5111C7AB0000FB988 /* ESRenderer.h */,
+				DFB190EF111C79D4000FB988 /* ES1Renderer.h */,
+				DFB190F0111C79D4000FB988 /* ES1Renderer.mm */,
+				DFC864A8118B429100E18C4C /* ES2Renderer.h */,
+				DFC864A9118B429100E18C4C /* ES2Renderer.mm */,
+				4AE46EE51193438B00E29E87 /* RhGLShaderProgram.cpp */,
+				4AE46EE61193438B00E29E87 /* RhGLShaderProgram.h */,
+				DFC864B4118B436100E18C4C /* Shaders.h */,
+				DFC864B5118B436100E18C4C /* Shaders.mm */,
+			);
+			name = OpenGL;
+			sourceTree = "<group>";
+		};
+		DF70B619118E4E3100BA9EFE /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				4A6D998E1197CD63001A00BF /* GradientQuad.fsh */,
+				4A6D998F1197CD63001A00BF /* GradientQuad.vsh */,
+				4AE46EF2119343F000E29E87 /* FullscreenQuad.fsh */,
+				4AE46EF3119343F000E29E87 /* FullscreenQuad.vsh */,
+				4AE46EF4119343F000E29E87 /* PerPixelLighting.fsh */,
+				4AE46EF5119343F000E29E87 /* PerPixelLighting.vsh */,
+				4AE46EF6119343F000E29E87 /* PerVertexLighting.fsh */,
+				4AE46EF7119343F000E29E87 /* PerVertexLighting.vsh */,
+				DF70B622118E4F7700BA9EFE /* template.fsh */,
+				DF70B623118E4F7700BA9EFE /* template.vsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		DF71EF60112477D000234762 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DFBFBE93130B32CF0036686F /* stereo1.png */,
+				DFBFBE94130B32CF0036686F /* stereo1@2x.png */,
+				DFBFBE95130B32CF0036686F /* stereo2.png */,
+				DFBFBE96130B32CF0036686F /* stereo2@2x.png */,
+				DFBFBE97130B32CF0036686F /* zoomExtents.png */,
+				DFBFBE98130B32CF0036686F /* zoomExtents@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		DF7CC1521163F70D008480EB /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				DF4E155312271756008F221E /* MainWindow-iPad.xib */,
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
+		DF7EB76C1153E2EF00C8C743 /* 3DM Files */ = {
+			isa = PBXGroup;
+			children = (
+				DF9B8E0A11233D8D005FD2C5 /* Rhino Logo.3dm */,
+			);
+			name = "3DM Files";
+			sourceTree = "<group>";
+		};
+		DF870AB811276D6F0015E85F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DFFCA862112A0B0B00BD0C67 /* RhModelViewController.h */,
+				DFFCA863112A0B0B00BD0C67 /* RhModelViewController.mm */,
+				DFC860AA118A6A6E00E18C4C /* RhModelViewControllerPad.h */,
+				DFC860AB118A6A6E00E18C4C /* RhModelViewControllerPad.mm */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DFBA1C3A111BB3350053495D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DFBA1C51111BB4AF0053495D /* AppDelegate.h */,
+				DFBA1C52111BB4AF0053495D /* AppDelegate.mm */,
+				DF82B56A115496F4004DB2C2 /* DisplayMesh.h */,
+				DF82B56B115496F4004DB2C2 /* DisplayMesh.mm */,
+				DFE95BEC111A45A80014C98B /* Info.plist */,
+				DFBA1C5B111BB5540053495D /* main.mm */,
+				DFF7B900112609A600905404 /* MRLog.mm */,
+				DFBFBCC2130AFC8C0036686F /* RhModel.h */,
+				DFBFBCC3130AFC8C0036686F /* RhModel.mm */,
+				DF82B58711549743004DB2C2 /* ONModel.h */,
+				DF82B58811549743004DB2C2 /* ONModel.mm */,
+				DF3AA9BC119C9D5700319022 /* UIColor-RGBA.h */,
+				DF3AA9BD119C9D5700319022 /* UIColor-RGBA.mm */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFE95BE9111A45A80014C98B /* Rhino Viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFE95BEF111A45A90014C98B /* Build configuration list for PBXNativeTarget "Rhino Viewer" */;
+			buildPhases = (
+				DFE95BE6111A45A80014C98B /* Resources */,
+				DFE95BE7111A45A80014C98B /* Sources */,
+				DFE95BE8111A45A80014C98B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Rhino Viewer";
+			productName = iPhoneViewer;
+			productReference = DFE95BEA111A45A80014C98B /* Rhino Viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Robert McNeel & Associates";
+			};
+			buildConfigurationList = 10A037690982DF3D0007ECFC /* Build configuration list for PBXProject "RhinoViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				de,
+				es,
+				fr,
+				it,
+				cs,
+				pl,
+				ja,
+				ko,
+				"zh-Hans",
+				"zh-Hant",
+				ca,
+				fi,
+				nl,
+				sv,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* NURBSViewer */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFE95BE9111A45A80014C98B /* Rhino Viewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DFE95BE6111A45A80014C98B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A6D99921197CD7C001A00BF /* GradientQuad.fsh in Resources */,
+				4A6D99931197CD7C001A00BF /* GradientQuad.vsh in Resources */,
+				4AE46EFE1193440D00E29E87 /* FullscreenQuad.fsh in Resources */,
+				4AE46EFF1193440D00E29E87 /* FullscreenQuad.vsh in Resources */,
+				4AE46F001193440D00E29E87 /* PerPixelLighting.fsh in Resources */,
+				4AE46F011193440D00E29E87 /* PerPixelLighting.vsh in Resources */,
+				4AE46F021193440D00E29E87 /* PerVertexLighting.fsh in Resources */,
+				4AE46F031193440D00E29E87 /* PerVertexLighting.vsh in Resources */,
+				DF9B8E0C11233D8D005FD2C5 /* Rhino Logo.3dm in Resources */,
+				DF70B62F118E4F8700BA9EFE /* template.vsh in Resources */,
+				DF936FFA118F21CA00E03CB6 /* template.fsh in Resources */,
+				DFFCA8A6112A17A800BD0C67 /* Entitlements.plist in Resources */,
+				DF2E86511131DE1E0086CD66 /* Default.png in Resources */,
+				DF3E133011F51CA400FA6FF6 /* models.plist in Resources */,
+				DF7CC17911640214008480EB /* Default-Landscape.png in Resources */,
+				DF7CC17A11640214008480EB /* Default-Portrait.png in Resources */,
+				DF5CAB7511EE4959000EB8A1 /* Default@2x.png in Resources */,
+				DF37B40C1226FB6C00534E7D /* MainWindow.xib in Resources */,
+				DF4E155412271756008F221E /* MainWindow-iPad.xib in Resources */,
+				DFBFBE99130B32CF0036686F /* stereo1.png in Resources */,
+				DFBFBE9A130B32CF0036686F /* stereo1@2x.png in Resources */,
+				DFBFBE9B130B32CF0036686F /* stereo2.png in Resources */,
+				DFBFBE9C130B32CF0036686F /* stereo2@2x.png in Resources */,
+				DFBFBE9D130B32CF0036686F /* zoomExtents.png in Resources */,
+				DFBFBE9E130B32CF0036686F /* zoomExtents@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFE95BE7111A45A80014C98B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFBA1C3D111BB34F0053495D /* RhModelView.mm in Sources */,
+				DFBA1C40111BB35C0053495D /* EAGLView.mm in Sources */,
+				DFBA1C53111BB4AF0053495D /* AppDelegate.mm in Sources */,
+				DFBA1C5C111BB5540053495D /* main.mm in Sources */,
+				DFB19399111C9B16000FB988 /* ES1Renderer.mm in Sources */,
+				DFF7B901112609A600905404 /* MRLog.mm in Sources */,
+				DFFCA872112A0B0B00BD0C67 /* RhModelViewController.mm in Sources */,
+				DF82B58911549743004DB2C2 /* ONModel.mm in Sources */,
+				DF6EF0E711550FC3006F89AA /* DisplayMesh.mm in Sources */,
+				DF509F701180B55D00546AFE /* TransparentToolbar.mm in Sources */,
+				DFC864AA118B429100E18C4C /* ES2Renderer.mm in Sources */,
+				DFC864B7118B436100E18C4C /* Shaders.mm in Sources */,
+				4AE46DA811930E3E00E29E87 /* AnaglyphCalculator.mm in Sources */,
+				4AE46EE71193438B00E29E87 /* RhGLShaderProgram.cpp in Sources */,
+				DF3AA5DE119C58B000319022 /* ClippingPlanes.mm in Sources */,
+				DF3AA9BE119C9D5700319022 /* UIColor-RGBA.mm in Sources */,
+				DF37B3BA1226F3AB00534E7D /* RhModelViewControllerPad.mm in Sources */,
+				DFBFBCC4130AFC8C0036686F /* RhModel.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFB70D251207605A00027D9E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DF2E864F1131DE1E0086CD66 /* Default.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFB70D231207605A00027D9E /* en */,
+			);
+			name = Default.png;
+			sourceTree = "<group>";
+		};
+		DF5CAB7311EE4959000EB8A1 /* Default@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFB70D241207605A00027D9E /* en */,
+			);
+			name = "Default@2x.png";
+			sourceTree = "<group>";
+		};
+		DF7CC17511640214008480EB /* Default-Landscape.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFB70D211207605A00027D9E /* en */,
+			);
+			name = "Default-Landscape.png";
+			sourceTree = "<group>";
+		};
+		DF7CC17711640214008480EB /* Default-Portrait.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFB70D221207605A00027D9E /* en */,
+			);
+			name = "Default-Portrait.png";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		10A0376A0982DF3D0007ECFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF8968531163D65700B61D1B /* AppDebug.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = RhinoViewer_prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/include/malloc,
+					GData/Headers,
+					/usr/include/libxml2,
+				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		10A0376B0982DF3D0007ECFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF8968541163D65700B61D1B /* AppRelease.xcconfig */;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = RhinoViewer_prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/include/malloc,
+					GData/Headers,
+					/usr/include/libxml2,
+				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DFE95BED111A45A90014C98B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF8968551163D65700B61D1B /* iPhoneOS.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/opennurbs\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+					"-lxml2",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Rhino Viewer";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DFE95BEE111A45A90014C98B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF8968551163D65700B61D1B /* iPhoneOS.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/opennurbs\"",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+					"-lxml2",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Rhino Viewer";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		10A037690982DF3D0007ECFC /* Build configuration list for PBXProject "RhinoViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10A0376A0982DF3D0007ECFC /* Debug */,
+				10A0376B0982DF3D0007ECFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFE95BEF111A45A90014C98B /* Build configuration list for PBXNativeTarget "Rhino Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFE95BED111A45A90014C98B /* Debug */,
+				DFE95BEE111A45A90014C98B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

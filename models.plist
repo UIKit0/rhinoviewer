@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>models</key>
+	<array>
+		<dict>
+			<key>IRModelTitle</key>
+			<string>Rhino Logo</string>
+			<key>IRModelSource</key>
+			<integer>1</integer>
+			<key>IRModelDescription</key>
+			<string>McNeel sample model</string>
+			<key>IRBundleName</key>
+			<string>Rhino Logo</string>
+			<key>IRBundleImageName</key>
+			<string>Rhino Logo.png</string>
+			<key>IRIsSample</key>
+			<true/>
+		</dict>
+	</array>
+</dict>
+</plist>

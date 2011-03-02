@@ -1,0 +1,33 @@
+//
+//  iPhoneOS.xcconfig
+//  goRhino
+//
+//  Created by Marlin Prowell on 10/9/09.
+//  Copyright 2009 Robert McNeel & Associates. All rights reserved.
+//
+
+// Settings common to all iPhone and iPad builds
+
+SDKROOT = iphoneos4.2
+IPHONEOS_DEPLOYMENT_TARGET = 3.2
+
+GCC_OBJC_CALL_CXX_CDTORS = YES;
+GCC_C_LANGUAGE_STANDARD = c99
+GCC_WARN_ABOUT_RETURN_TYPE = YES
+//GCC_WARN_UNUSED_VARIABLE = YES
+HEADER_SEARCH_PATHS = $(inherited) /usr/include/malloc
+OTHER_CPLUSPLUSFLAGS = $(OTHER_CFLAGS) -fno-operator-names
+PREBINDING = NO
+PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO
+// armv6 and armv7
+ARCHS = $(ARCHS_STANDARD_32_BIT)
+// armv7 only
+//ARCHS = $(ARCHS_UNIVERSAL_IPHONE_OS)
+
+// Override ONLY_ACTIVE_ARCH = YES setting in Debug.xcconfig
+// If this is set to YES, the iPhone build settings no longer know what compiler to use!
+ONLY_ACTIVE_ARCH = NO
+
+GCC_SYMBOLS_PRIVATE_EXTERN = YES
+KEEP_PRIVATE_EXTERNS = YES
+GCC_INLINES_ARE_PRIVATE_EXTERN = NO

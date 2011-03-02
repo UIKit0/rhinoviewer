@@ -1,0 +1,12 @@
+//
+//  LibDebug.xcconfig
+//  goRhino
+//
+//  Created by Marlin Prowell on 10/9/09.
+//  Copyright 2009 Robert McNeel & Associates. All rights reserved.
+//
+
+// Settings for static library Debug builds
+
+#include "Base.xcconfig"
+#include "Debug.xcconfig"
