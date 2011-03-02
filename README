@@ -1,0 +1,11 @@
+This Xcode project builds an OpenNURBS file viewer for the iPad / iPhone / iPod touch.  It builds a single universal app that will run on both iPads and iPhones.
+
+You need the Apple Xcode development system version 3.2.5 installed on your computer and need to know how to build and run iOS applications.
+
+This sample shows how to read an OpenNURBS file, extract the meshes and materials, and build the OpenGL VBOs necessary to display the model.  This sample also implements model manipulation with touch events, such as rotating, panning, and zooming the model, and restoring the model to its original location with a double tap.
+
+This sample displays a single model that is included inside the application bundle.  Management of multiple OpenNURBS models is likely to be highly application specific so is not included in this sample.
+
+
+
+This distribution was tested with Xcode version 3.2.5 and the iOS 4.2 SDK.
