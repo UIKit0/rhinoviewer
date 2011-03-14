@@ -20,6 +20,7 @@
 #import "RhModelView.h"
 #import "DisplayMesh.h"
 #import "UIColor-RGBA.h"
+#import "ScreenBitmap.h"
 
 
 #if defined (_DEBUG)
@@ -487,6 +488,14 @@ void glLoadMatrixd (double* d)
   [self performSelector: @selector(clearFrame) onThread: [self renderThread] withObject: nil waitUntilDone: NO];
 }
 
+- (ScreenBitmap*) captureBitmap
+{
+  ScreenBitmap* bitmap = [[[ScreenBitmap alloc] initWithWidth: backingWidth height: backingHeight] autorelease];
+  glPixelStorei(GL_PACK_ALIGNMENT, 4);
+  glReadPixels(0,0,backingWidth,backingHeight,GL_RGBA,GL_UNSIGNED_BYTE, [bitmap buffer]);
+  return bitmap;
+}
+
 - (UIImage*) captureImage
 {
   int screenWidth = backingWidth;
@@ -582,6 +591,22 @@ void glLoadMatrixd (double* d)
   glMaterialfv (GL_FRONT_AND_BACK, pname, c);
 }
 
+// Return a material that indicates the mesh is selected
+- (ON_Material) selectedMaterialWithMaterial: (const ON_Material&) material
+{
+  ON_Color blackColor;
+  ON_Color yellowColor;
+  
+  GLfloat alpha = (GLfloat)(1.0 - material.Transparency());
+  yellowColor.SetFractionalRGBA (1.0, 1.0, 0.0, alpha);   // bright yellow
+  
+  ON_Material selectedMaterial = material;
+  selectedMaterial.SetAmbient(yellowColor);
+  selectedMaterial.SetDiffuse(yellowColor);
+  selectedMaterial.SetSpecular(blackColor);
+  selectedMaterial.SetEmission(blackColor);
+  return selectedMaterial;
+}
 
 - (void) setMaterial: (const ON_Material&) material
 {
@@ -717,6 +742,10 @@ void glLoadMatrixd (double* d)
 /////////////////////////////////////////////////////////////////////
 - (void) setupLighting
 {
+  // some ambient light
+  GLfloat ambientLight[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+  
   // simple bright white headlight
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
@@ -730,7 +759,6 @@ void glLoadMatrixd (double* d)
   glLightfv( GL_LIGHT0, GL_SPECULAR, white );
   glEnable( GL_LIGHT0 );
   glPopMatrix();
-  
 }
 
 - (void) renderTexture: (RhModel*) model inViewport: (ON_Viewport&) viewport
@@ -820,20 +848,6 @@ void glLoadMatrixd (double* d)
       [needsImageCapturedDelegate performSelectorOnMainThread: @selector(didCaptureImage:) withObject: capturedImage waitUntilDone: NO];
     needsImageCapturedDelegate = nil;
   }
-  
-//  BOOL imageScaleMatchesScreen = YES;
-//  if ([model.thumbnailImage respondsToSelector: @selector(scale)])
-//    imageScaleMatchesScreen = [model.thumbnailImage scale] == [RhinoApp screenScale];
-//  if (model.thumbnailImage == nil || !imageScaleMatchesScreen) {
-//    UIImage* outputImage = [self captureImage];
-//    UIImage* thumbnailImage = [outputImage thumbnailImage: 48 * [RhinoApp screenScale]
-//                                        transparentBorder: 1
-//                                             cornerRadius: 0
-//                                     interpolationQuality: kCGInterpolationHigh];
-//    if ([RhinoApp screenScale] != 1.0)
-//      thumbnailImage = [UIImage imageWithCGImage: thumbnailImage.CGImage scale: [RhinoApp screenScale] orientation: UIImageOrientationUp];
-//    model.thumbnailImage = thumbnailImage;
-//  }
   
   if ( present )
   {
@@ -1056,7 +1070,10 @@ void glLoadMatrixd (double* d)
 
 - (void) drawMesh: (DisplayMesh*) mesh
 {
-  [self setMaterial: [mesh material]];
+  if (mesh.selected)
+    [self setMaterial: [self selectedMaterialWithMaterial:[mesh material]]];
+  else
+    [self setMaterial: [mesh material]];
   
   glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, [mesh indexBuffer]);
   
@@ -1075,5 +1092,133 @@ void glLoadMatrixd (double* d)
   
   glDrawElements(GL_TRIANGLES, 3 * [mesh triangleCount], GL_UNSIGNED_SHORT, 0);
 }
+
+#pragma mark ---- picking image ----
+
+- (void) setupPickImageLighting
+{
+  glDisable(GL_BLEND);
+  GLfloat ambientLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+  glDisable( GL_LIGHT0 );
+}  
+
+/////////////////////////////////////////////////////////////////////
+
+- (void) setPickColor: (const ON_Color&) color
+{
+  ON_Color blackColor;
+
+  [self setMaterialColor: GL_AMBIENT fromONColor: color alpha: 1.0];
+  [self setMaterialColor: GL_DIFFUSE fromONColor: blackColor alpha: 1.0];
+  [self setMaterialColor: GL_EMISSION fromONColor: blackColor alpha: 1.0];
+  [self setMaterialColor: GL_SPECULAR fromONColor: blackColor alpha: 1.0];
+  glMaterialf(  GL_FRONT_AND_BACK, GL_SHININESS, 0 );
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void) drawPickImageMesh: (DisplayMesh*) mesh
+{
+  [self setPickColor: [mesh pickColor]];
+    
+  glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, [mesh indexBuffer]);
+  
+  if ( 1 ) {
+    glBindBuffer (GL_ARRAY_BUFFER, [mesh vertexBuffer] );
+    glEnableClientState (GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, sizeof(VertexData), 0);
+    glEnableClientState (GL_NORMAL_ARRAY);
+    glNormalPointer(GL_FLOAT, sizeof(VertexData), (GLvoid*)sizeof(ON_3fPoint));
+  }
+  else {
+    glBindBuffer (GL_ARRAY_BUFFER, [mesh vertexBuffer]);
+    glEnableClientState (GL_VERTEX_ARRAY);
+    glVertexPointer (3, GL_FLOAT, sizeof(ON_3fPoint), (void*)0);
+  }
+  
+  glDrawElements(GL_TRIANGLES, 3 * [mesh triangleCount], GL_UNSIGNED_SHORT, 0);
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void) drawPickImageScene: (RhModel*) scene
+{
+  // Draw scene...
+  if ( scene ) 
+  {
+    // draw each mesh
+    NSArray* meshes = [scene meshes];
+    
+    // render all opaque objects...
+    for (DisplayMesh* mesh in meshes)
+      [self drawPickImageMesh: mesh];
+    
+    // Now render all transparent meshes...
+    NSArray* transmeshes = [scene transmeshes];
+    
+    if ( transmeshes.count > 0 )
+    {      
+      for (DisplayMesh* mesh in transmeshes) {
+        const ON_Material& material = [mesh material];
+        // Include transparent meshes only if they are somewhat opaque.
+        // This allows selecting meshes behind transparent meshes like glass materials
+        if (material.Transparency() < 0.8)
+          [self drawPickImageMesh: mesh];
+      }
+    }
+  }
+  CheckGLError();
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// This method runs on the render thread
+- (void) renderPickBitmap
+{
+  RhModel* model;
+  static ON_Viewport viewport;
+  
+  @synchronized(self)
+  {
+    model = renderModel;
+    viewport = renderViewport1;
+    
+    if ([model onMacModel] == nil)
+      return;
+    
+    glBindFramebufferOES (GL_FRAMEBUFFER_OES, defaultFramebuffer);
+    
+    [self setupPickImageLighting];
+    [self setGLModelViewMatrix: viewport];
+    [self setGLProjectionMatrix: viewport inWidth: backingWidth inHeight: backingHeight];
+    
+    // set transparent background color
+    ON_Color savedBackgroundColor = backgroundColor;
+    backgroundColor = ON_Color (0, 0, 0, 0);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    // draw the scene using flat lighting and the the mesh pick colors
+    [self drawPickImageScene: model];
+    
+    // save the pick bitmap in the model
+    model.pickBitmap = [self captureBitmap];
+
+    // restore background color
+    backgroundColor = savedBackgroundColor;
+    glClearColor( (float)backgroundColor.FractionRed(), 
+                 (float)backgroundColor.FractionGreen(), 
+                 (float)backgroundColor.FractionBlue(), 
+                 (float)backgroundColor.FractionAlpha()
+                 );
+  }
+}
+
+- (void) capturePickBitmap
+{
+  [self performSelector: @selector(renderPickBitmap) onThread: [self renderThread] withObject: nil waitUntilDone: NO];
+}
+
 
 @end

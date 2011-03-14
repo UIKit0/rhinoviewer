@@ -18,10 +18,20 @@
 #import "RhModel.h";
 #import "RhModelViewController.h"
 #import "ClippingPlanes.h"
+#import "ScreenBitmap.h"
 
 #import <CoreGraphics/CGGeometry.h>
 #import <mach/mach.h>
 #import <mach/mach_time.h>
+
+
+//
+// Define PICK_MODE_ENABLED as non-zero value to enable pick mode.
+// When pick mode is enabled, touch and hold over a mesh to select the mesh.
+//
+
+#define PICK_MODE_ENABLED   01
+
 
 
 // 13-Aug-2009 Dale Fugier, Cosine interpolator
@@ -74,7 +84,7 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
 @implementation RhModelView
 
 
-@synthesize delegate, stereoMode, anaglyph;
+@synthesize delegate, stereoMode, anaglyph, pickTimer;
 
 
 #pragma mark ---- initialization ----
@@ -199,6 +209,7 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
   // save initial viewport settings for restoreView
   initialPosition = lastPosition = m_view.m_vp;
   atInitialPosition = true;
+  rhinoModel.pickBitmap = nil;
 }
 
 
@@ -437,7 +448,7 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
     // This entirely completes the animation. Now schedule one more redraw of the model with fastDrawing disabled
     // and this redraw will be done at exactly the same postion.  This prevents the final animation frame
     // from jumping to the final location because the final draw will take longer with fastDrawing disabled.
-    [self performSelector: @selector(redrawSlow) withObject: nil afterDelay: 0.05];
+    [self performSelector: @selector(redrawDetailed) withObject: nil afterDelay: 0.05];
   }
 }
 
@@ -467,10 +478,13 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
   [self startAnimation];
 }
 
-- (void) redrawSlow
+- (void) redrawDetailed
 {
   RhinoApp.fastDrawing = NO;
   [self setNeedsDisplay];
+  
+  // This method is always called when the view stops redrawing the model.  Capture a pick bitmap.
+  [renderer capturePickBitmap];
 }
 
 #pragma mark ---- view change ----
@@ -868,6 +882,8 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
     else {
       [renderer renderModel: rhinoModel inViewport: m_view.m_vp];
     }
+    if (rhinoModel.pickBitmap == nil)
+      [renderer capturePickBitmap];
   }
   else
     [renderer clearView];
@@ -903,13 +919,110 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
 - (void) viewWillDisappear
 {
   [self stopAnimation];
+  rhinoModel.pickBitmap = nil;
 }
+
+
+#pragma mark ---- pick events ----
+
+#if PICK_MODE_ENABLED
+
+- (void) startPickMode: (id) sender
+{
+  [pickTimer invalidate];
+  self.pickTimer = nil;
+  pickMode = YES;
+  pickColor = [rhinoModel.pickBitmap pixelAt: pickStartLocation];
+  [[self delegate] setPickColor: pickColor];
+}
+
+- (void) startPickTimer
+{
+  [pickTimer invalidate];
+  self.pickTimer = [NSTimer scheduledTimerWithTimeInterval: 0.7 target: self selector: @selector(startPickMode:) userInfo: nil repeats: NO];
+}
+
+- (void) cancelPickTimer
+{
+  if (pickTimer) {
+    [pickTimer invalidate];
+    self.pickTimer = nil;
+  }
+}
+
+- (void) pickBeganWithEvent: (UIEvent*) event
+{
+  NSSet* allTouches = [event touchesForView: self];
+  if (allTouches.count > 1) {
+    pickMode = NO;
+    [self cancelPickTimer];
+    return;
+  }
+  
+  // save pick location
+  UITouch* touch = [allTouches anyObject];
+  pickStartLocation = [touch locationInView: self];
+
+  [self startPickTimer];
+  pickColor = 0;
+}
+
+- (void) pickMovedWithEvent: (UIEvent*) event
+{
+  NSSet* allTouches = [event touchesForView: self];
+  if (pickMode) {
+    // select mesh object under touch location
+    UITouch* touch = [allTouches anyObject];
+    unsigned int pixelColor = [rhinoModel.pickBitmap pixelAt: [touch locationInView: self]];
+    // tell our delegate when the color under the touch point has changed
+    if (pickColor != pixelColor)
+      [[self delegate] setPickColor: pixelColor];
+    pickColor = pixelColor;
+  }
+  else {
+    if (allTouches.count > 1) {
+      [self cancelPickTimer];
+      return;
+    }
+    UITouch* touch = [allTouches anyObject];
+    CGPoint location = [touch locationInView: self];
+    CGFloat dist = [self distanceFromPoint: location toPoint: pickStartLocation];
+    // if the touch point moves too far from the starting point, cancel the pick timer.
+    if (dist > 3)
+      [self cancelPickTimer];
+  }
+}
+
+- (void) pickEndedWithEvent: (UIEvent*) event
+{
+  [self cancelPickTimer];
+  pickMode = NO;
+}
+
+#else
+
+// dummy methods defined when pick mode is not enabled
+- (void) pickBeganWithEvent: (UIEvent*) event
+{
+}
+
+- (void) pickMovedWithEvent: (UIEvent*) event
+{
+}
+
+- (void) pickEndedWithEvent: (UIEvent*) event
+{
+}
+
+#endif    // PICK_MODE_ENABLED
 
 
 #pragma mark ---- touch events ----
 
 - (void)touchesBegan: (NSSet *)touches withEvent: (UIEvent *)event
 {
+  [self pickBeganWithEvent: event];
+
   [[self delegate] cancelSingleTapTimer];
 
   NSSet* allTouches = [event touchesForView: self];
@@ -970,6 +1083,10 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
 {
   RhinoApp.fastDrawing = YES;
   
+  [self pickMovedWithEvent: event];
+  if (pickMode)
+    return;   // do nothing else here if in pick mode
+
   // ignore everything while more than two touches
   if (moreThanTwoTouches)
     return;
@@ -1032,6 +1149,8 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
   if (touchesLeft > 0)
     RhinoApp.fastDrawing = YES;   // keep drawing fast
 
+  [self pickEndedWithEvent: event];
+
 //  DLog (@"allTouches:%d touchesLeft:%d", allTouches.count, touchesLeft);
 
   gRotate = false;
@@ -1069,8 +1188,7 @@ static ON_3dVector Slerp( const ON_3dVector& v0, const ON_3dVector& v1, double n
   
   if (touchesLeft == 0) {
     if (!sawDoubleTap)
-      [self performSelector: @selector(redrawSlow) withObject: nil afterDelay: 0.05];
-    
+      [self performSelector: @selector(redrawDetailed) withObject: nil afterDelay: 0.05];
     moreThanTwoTouches = false;
     gRotate = false; 
     gTwoTouch = false;

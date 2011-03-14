@@ -49,6 +49,8 @@
 @property (nonatomic, retain) NSMutableArray* topToolbarItems;
 @property (nonatomic, retain) NSMutableArray* bottomToolbarItems;
 
+@property (nonatomic, retain) DisplayMesh* selectedMesh;
+
 @property (nonatomic, retain) NSTimer* hidingTimer;
 @property (nonatomic, retain) NSTimer* singleTapTimer;
 
@@ -66,5 +68,7 @@
 
 - (void) startSingleTapTimer;
 - (void) cancelSingleTapTimer;
+
+- (void) setPickColor: (unsigned int) color;
 
 @end

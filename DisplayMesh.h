@@ -39,6 +39,9 @@ typedef struct {
 
 @interface DisplayMesh : NSObject {
 
+  ON_Color pickColor;
+  BOOL selected;
+
   ON_Material material;
   int partitionIndex;
   ON_BoundingBox boundingBox;
@@ -72,6 +75,9 @@ typedef struct {
 @property (nonatomic, assign) BOOL hasVertexNormals;
 @property (nonatomic, assign) BOOL hasVertexColors;
 @property (nonatomic, assign) unsigned int Stride;
+
+@property (nonatomic, assign) ON_Color pickColor;
+@property (nonatomic, assign) BOOL selected;
 
 - (id) initWithMesh: (const ON_Mesh*) mesh index: (int) index material: (const ON_Material&) material saveVBOData: (BOOL) saveVBOData;
 - (void) restoreUsingMesh: (const ON_Mesh*) onMesh material: (const ON_Material&) onMaterial;

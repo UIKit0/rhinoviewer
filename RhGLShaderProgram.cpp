@@ -155,11 +155,18 @@ void CRhGLShaderProgram::SetupMaterial(const ON_Material& mat)
   GLfloat alpha    = (GLfloat)(1.0 - mat.Transparency());
   GLfloat shine    = 128.0*(mat.Shine() / ON_Material::MaxShine());
   GLfloat black[4] = {0.0,0.0,0.0,1.0};
+  GLfloat ambi[4]  = { mat.Ambient().FractionRed(), mat.Ambient().FractionGreen(), mat.Ambient().FractionBlue(), mat.m_ambient.FractionAlpha() };
   GLfloat diff[4]  = { dcolor.FractionRed(), dcolor.FractionGreen(), dcolor.FractionBlue(), alpha };
   GLfloat spec[4]  = { scolor.FractionRed(), scolor.FractionGreen(), scolor.FractionBlue(), 1.0f };
   GLfloat emmi[4]  = { ecolor.FractionRed(), ecolor.FractionGreen(), ecolor.FractionBlue(), 1.0f };
   GLfloat* pspec   = shine?spec:black;
   
+  if ( m_Uniforms.rglLightAmbient >= 0) {
+    if (mat.m_ambient.Alpha() > 0)
+      glUniform4fv( m_Uniforms.rglLightAmbient, 1, ambi );
+    else
+      glUniform4fv( m_Uniforms.rglLightAmbient, 1, black );
+  }
   if ( m_Uniforms.rglDiffuse >= 0 )
     glUniform4fv( m_Uniforms.rglDiffuse, 1, diff );
   if ( m_Uniforms.rglSpecular >= 0 )

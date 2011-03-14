@@ -29,6 +29,7 @@
 @synthesize title, description, source, urlString, cachesDirectoryName, documentsFilename, bundleName, isSample;
 @synthesize fileSize, meshObjectCount, renderMeshCount, geometryCount, brepCount, brepWithMeshCount, downloaded;
 @synthesize preparationCancelled, readingModel, continueReading, continueReadingLock, readSuccessfully, initializationFailed, meshes, transmeshes;
+@synthesize pickBitmap;
 
 
 // Helper method for creating a full path from a file name that is in the ~/Library/Caches directory
@@ -103,6 +104,7 @@
   delete onMacModel;
   [meshes release];
   [transmeshes release];
+  [pickBitmap release];
 
   [title release];
   [description release];
@@ -268,6 +270,8 @@
   meshes = nil;
   [transmeshes release];
   transmeshes = nil;
+  [pickBitmap release];
+  pickBitmap = nil;
 }
 
 // revert to undownloaded status

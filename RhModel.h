@@ -18,6 +18,8 @@
 
 class EX_ONX_Model;
 @class GDataEntryDocBase;
+@class ScreenBitmap;
+
 
 typedef enum {
   unknownSource = 0,
@@ -75,6 +77,8 @@ typedef enum {
   EX_ONX_Model* onMacModel;
   NSMutableArray* meshes;     // our DisplayMesh objects
   NSMutableArray* transmeshes;     // our DisplayMesh objects
+  
+  ScreenBitmap* pickBitmap;
 }
 
 
@@ -104,6 +108,7 @@ typedef enum {
 
 @property (retain) NSArray* meshes;
 @property (retain) NSArray* transmeshes;
+@property (retain) ScreenBitmap* pickBitmap;
 
 
 - (void)encodeWithCoder:(NSCoder *)aCoder;

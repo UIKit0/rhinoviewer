@@ -40,6 +40,8 @@ struct RhGLDrawable
 - (void) renderModel: (RhModel*) model inLeftEye: (const ON_Viewport&) leftEye inRightEye: (const ON_Viewport&) rightEye;
 - (UIImage*) renderPreview: (RhModel*) model inViewport: (ON_Viewport) viewport;
 
+- (void) capturePickBitmap;
+
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
 - (void) clearView;
 

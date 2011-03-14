@@ -18,6 +18,7 @@
 #import "RhModel.h"
 #import "RhModelView.h"
 #import "UIColor-RGBA.h"
+#import "ScreenBitmap.h"
 
 
 #if defined (_DEBUG)
@@ -422,6 +423,13 @@ enum
   [self performSelector: @selector(clearFrame) onThread: [self renderThread] withObject: nil waitUntilDone: NO];
 }
 
+- (ScreenBitmap*) captureBitmap
+{
+  ScreenBitmap* bitmap = [[[ScreenBitmap alloc] initWithWidth: backingWidth height: backingHeight] autorelease];
+  glPixelStorei(GL_PACK_ALIGNMENT, 4);
+  glReadPixels(0,0,backingWidth,backingHeight,GL_RGBA,GL_UNSIGNED_BYTE, [bitmap buffer]);
+  return bitmap;
+}
 
 /////////////////////////////////////////////////////////////////////
 - (UIImage*) captureImage
@@ -685,6 +693,27 @@ enum
 #pragma mark ---- ON_Materials ----
 
 /////////////////////////////////////////////////////////////////////
+// Return a material that indicates the mesh is selected
+- (ON_Material) selectedMaterialWithMaterial: (const ON_Material&) material
+{
+  ON_Color blackColor;
+  ON_Color ambientColor;
+  ON_Color diffuseColor;
+  
+  GLfloat alpha = (GLfloat)(1.0 - material.Transparency());
+  ambientColor.SetFractionalRGBA(0.3, 0.3, 0.0, 1.0);   // pale yellow
+  diffuseColor.SetFractionalRGBA(0.7, 0.7, 0.0, alpha); // bright yellow
+  
+  ON_Material selectedMaterial = material;
+  selectedMaterial.SetAmbient(ambientColor);
+  selectedMaterial.SetDiffuse(diffuseColor);
+  selectedMaterial.SetSpecular(blackColor);
+  selectedMaterial.SetEmission(blackColor);
+  return selectedMaterial;
+}
+
+
+/////////////////////////////////////////////////////////////////////
 - (void) setMaterial: (const ON_Material&) material
 {
   if ( activeShader != NULL )
@@ -929,20 +958,6 @@ enum
     needsImageCapturedDelegate = nil;
   }
   
-//  BOOL imageScaleMatchesScreen = YES;
-//  if ([model.thumbnailImage respondsToSelector: @selector(scale)])
-//    imageScaleMatchesScreen = [model.thumbnailImage scale] == [RhinoApp screenScale];
-//  if (model.thumbnailImage == nil || !imageScaleMatchesScreen) {
-//    UIImage* outputImage = [self captureImage];
-//    UIImage* thumbnailImage = [outputImage thumbnailImage: 48 * [RhinoApp screenScale]
-//                                        transparentBorder: 1
-//                                             cornerRadius: 0
-//                                     interpolationQuality: kCGInterpolationHigh];
-//    if ([RhinoApp screenScale] != 1.0)
-//      thumbnailImage = [UIImage imageWithCGImage: thumbnailImage.CGImage scale: [RhinoApp screenScale] orientation: UIImageOrientationUp];
-//    model.thumbnailImage = thumbnailImage;
-//  }
-  
   if ( present )
   {
     glBindRenderbuffer (GL_RENDERBUFFER, colorRenderbuffer);
@@ -1127,8 +1142,11 @@ enum
 /////////////////////////////////////////////////////////////////////
 - (void) drawMesh: (DisplayMesh*) mesh
 {
-  [self setMaterial: [mesh material]];
-  
+  if (mesh.selected)
+    [self setMaterial: [self selectedMaterialWithMaterial:[mesh material]]];
+  else
+    [self setMaterial: [mesh material]];
+    
   glBindBuffer( GL_ARRAY_BUFFER, [mesh vertexBuffer] );
   
   unsigned int stride = [mesh Stride];
@@ -1160,6 +1178,151 @@ enum
 
   glDisableVertexAttribArray( ATTRIB_VERTEX );
   glDisableVertexAttribArray( ATTRIB_NORMAL );
+}
+
+#pragma mark ---- picking image ----
+
+- (void) setPickColor: (const ON_Color&) color
+{
+  ON_Color blackColor;
+  blackColor.SetAlpha(255);
+  ON_Color pickColor = color;
+  pickColor.SetAlpha(255);
+  
+  ON_Material pickMaterial;
+  pickMaterial.m_ambient = pickColor;
+  pickMaterial.m_diffuse = blackColor;
+  pickMaterial.m_emission = blackColor;
+  pickMaterial.m_specular = blackColor;
+  pickMaterial.SetTransparency(0);
+  pickMaterial.SetShine(0);
+  [self setMaterial: pickMaterial];
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void) drawPickImageMesh: (DisplayMesh*) mesh
+{
+  [self setPickColor: [mesh pickColor]];
+
+  glBindBuffer( GL_ARRAY_BUFFER, [mesh vertexBuffer] );
+
+  unsigned int stride = [mesh Stride];
+  
+  glEnableVertexAttribArray( ATTRIB_VERTEX );
+  glVertexAttribPointer( ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, stride, 0 );
+  
+  if ( [mesh hasVertexNormals] )
+  {
+    glEnableVertexAttribArray( ATTRIB_NORMAL );
+    glVertexAttribPointer( ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, stride, (GLvoid*)sizeof(ON_3fPoint) );
+  }
+
+  if ( [mesh hasVertexColors] )
+  {
+    int  offset = sizeof(ON_3fPoint);
+    
+    if ( [mesh hasVertexNormals] )
+      offset += sizeof(ON_3fVector);
+    
+    glEnableVertexAttribArray( ATTRIB_COLOR );
+    glVertexAttribPointer( ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, stride, (GLvoid*)offset );
+    if ( activeShader != NULL )
+      activeShader->EnableColorUsage( true );
+  }
+
+  glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, [mesh indexBuffer] );
+  glDrawElements( GL_TRIANGLES, 3 * [mesh triangleCount], GL_UNSIGNED_SHORT, 0 );  
+
+  glDisableVertexAttribArray( ATTRIB_VERTEX );
+  glDisableVertexAttribArray( ATTRIB_NORMAL );
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void) drawPickImageScene: (RhModel*) scene
+{
+  // Draw scene...
+  if ( scene ) 
+  {
+    // draw each mesh
+    NSArray* meshes = [scene meshes];
+    
+    // render all opaque objects...
+    for (DisplayMesh* mesh in meshes)
+      [self drawPickImageMesh: mesh];
+    
+    // Now render all transparent meshes...
+    NSArray* transmeshes = [scene transmeshes];
+    
+    if ( transmeshes.count > 0 )
+    {      
+      for (DisplayMesh* mesh in transmeshes) {
+        const ON_Material& material = [mesh material];
+        // include transparent meshes if they are somewhat opaque
+        // this allows selecting meshes behind glass materials
+        if (material.Transparency() < 0.8)
+          [self drawPickImageMesh: mesh];
+      }
+    }
+  }
+  CheckGLError();
+}
+
+/////////////////////////////////////////////////////////////////////
+
+// This method runs on the render thread
+- (void) renderPickBitmap
+{
+  RhModel* model;
+  static ON_Viewport viewport;
+  
+  @synchronized(self)
+  {
+    model = renderModel;
+    viewport = renderViewport1;
+    
+    if ([model onMacModel] == nil)
+      return;
+    
+    activeShader = pervertexShader;
+    [self setupActiveShader: model inViewport: viewport];  
+    
+    glBindFramebuffer (GL_FRAMEBUFFER, defaultFramebuffer);
+    glViewport (0, 0, backingWidth, backingHeight);
+    
+    glDisable(GL_BLEND);
+    glDepthFunc( GL_GEQUAL );
+    
+    // set transparent background color
+    ON_Color savedBackgroundColor = backgroundColor;
+    backgroundColor = ON_Color (0, 0, 0, 0);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    // draw the scene using flat shading and the the mesh pick colors
+    [self drawPickImageScene: model];
+    
+    // save the pick bitmap in the model
+    model.pickBitmap = [self captureBitmap];
+    
+    // restore background color
+    backgroundColor = savedBackgroundColor;
+    glClearColor( (float)backgroundColor.FractionRed(), 
+                 (float)backgroundColor.FractionGreen(), 
+                 (float)backgroundColor.FractionBlue(), 
+                 (float)backgroundColor.FractionAlpha()
+                 );
+    
+    activeShader->Disable();
+  }
+}
+
+/////////////////////////////////////////////////////////////////////
+
+- (void) capturePickBitmap
+{
+  [self performSelector: @selector(renderPickBitmap) onThread: [self renderThread] withObject: nil waitUntilDone: NO];
 }
 
 

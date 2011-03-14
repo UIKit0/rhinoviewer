@@ -25,6 +25,7 @@
 
 @synthesize captureVBOData;
 @synthesize vertexBuffer, normalBuffer, indexBuffer, material, isClosed, hasVertexNormals, hasVertexColors, Stride;
+@synthesize pickColor, selected;
 
 - (void) deleteBuffers
 {
@@ -477,6 +478,8 @@
     initializationFailed = NO;
     captureVBOData = saveVBOData;
     isClosed = NO;
+    // set our pick color to a random value (and hopefully different from every other mesh pickColor)
+    pickColor.SetFractionalRGBA((float)rand()/RAND_MAX,(float)rand()/RAND_MAX,(float)rand()/RAND_MAX,1.0);
     if ( onMesh->IsClosed() )
       isClosed = YES;
     

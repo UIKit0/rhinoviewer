@@ -85,6 +85,11 @@ class ON_Xform;
   BOOL stereoMode;
   AnaglyphCalculator*  anaglyph;
 
+  BOOL pickMode;
+  unsigned int pickColor;
+  CGPoint pickStartLocation;
+  NSTimer* pickTimer;
+
   UIDeviceOrientation orientation;
   UIAccelerationValue accelerationX;
   UIAccelerationValue accelerationY;
@@ -99,6 +104,8 @@ class ON_Xform;
 
 @property (nonatomic, assign) BOOL stereoMode;
 @property (nonatomic, retain) AnaglyphCalculator*  anaglyph;
+
+@property (nonatomic, retain) NSTimer* pickTimer;
 
 
 - (RhModel*) model;

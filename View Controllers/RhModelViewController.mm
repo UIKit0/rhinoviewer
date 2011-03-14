@@ -28,6 +28,7 @@
 
 @synthesize glView, topToolbarItems, bottomToolbarItems, displayedModel;
 @synthesize hidingTimer, singleTapTimer;
+@synthesize selectedMesh;
 
 
 - (void) stopTimers
@@ -246,6 +247,41 @@
     [self hideBars: self];
 }
 
+#pragma mark Picking
+
+- (void) setPickColor: (unsigned int) color
+{
+  if (selectedMesh != nil) {
+    // unselect the current mesh
+    selectedMesh.selected = NO;
+    self.selectedMesh = nil;
+  }
+  if (color != 0) {
+    // find the mesh with this pick color
+    NSArray* meshes = [displayedModel meshes];
+    for (DisplayMesh* mesh in meshes) {
+      unsigned int meshColor = [mesh pickColor];
+      if (color == meshColor) {
+        self.selectedMesh = mesh;
+        mesh.selected = YES;
+        break;
+      }
+    }
+    if (selectedMesh == nil) {
+      // did not find it, might be a transparent mesh
+      NSArray* meshes = [displayedModel transmeshes];
+      for (DisplayMesh* mesh in meshes) {
+        unsigned int meshColor = [mesh pickColor];
+        if (color == meshColor) {
+          self.selectedMesh = mesh;
+          mesh.selected = YES;
+          break;
+        }
+      }
+    }
+  }
+  [[self glView] setNeedsDisplay];
+}
 
 #pragma mark View controller overrides
 
@@ -292,6 +328,8 @@
 
 - (void) viewDidAppear: (BOOL) animated
 {
+  self.selectedMesh.selected = NO;
+  self.selectedMesh = nil;
   if (RhinoApp.currentModel != nil) {
     [RhinoApp.currentModel prepareModelWithDelegate: self];
     [glView viewDidAppear];
@@ -302,6 +340,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [selectedMesh setSelected: NO];
+  self.selectedMesh = nil;
   [self stopTimers];
   [RhinoApp.currentModel cancelModelPreparation];  
 	[glView viewWillDisappear];
@@ -310,6 +350,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+  [glView performSelectorOnMainThread: @selector(redrawDetailed) withObject: nil waitUntilDone: NO];    // capture a new pick bitmap
 }
 
 #pragma mark Image Capture

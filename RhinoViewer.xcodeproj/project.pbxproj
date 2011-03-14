@@ -31,6 +31,7 @@
 		DF5CAB7511EE4959000EB8A1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DF5CAB7311EE4959000EB8A1 /* Default@2x.png */; };
 		DF6EF0E711550FC3006F89AA /* DisplayMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF82B56B115496F4004DB2C2 /* DisplayMesh.mm */; };
 		DF70B62F118E4F8700BA9EFE /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DF70B623118E4F7700BA9EFE /* template.vsh */; };
+		DF76F938132E9A7D0046F921 /* ScreenBitmap.mm in Sources */ = {isa = PBXBuildFile; fileRef = DF76F937132E9A7D0046F921 /* ScreenBitmap.mm */; };
 		DF79F866131EA7D500F8400B /* libopennurbs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF79F865131EA7D500F8400B /* libopennurbs.a */; };
 		DF7CC17911640214008480EB /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7CC17511640214008480EB /* Default-Landscape.png */; };
 		DF7CC17A11640214008480EB /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7CC17711640214008480EB /* Default-Portrait.png */; };
@@ -87,6 +88,8 @@
 		DF58F25C1189F74900C75307 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF70B622118E4F7700BA9EFE /* template.fsh */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = template.fsh; path = Shaders/template.fsh; sourceTree = "<group>"; };
 		DF70B623118E4F7700BA9EFE /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = template.vsh; path = Shaders/template.vsh; sourceTree = "<group>"; };
+		DF76F936132E9A7D0046F921 /* ScreenBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenBitmap.h; sourceTree = "<group>"; };
+		DF76F937132E9A7D0046F921 /* ScreenBitmap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScreenBitmap.mm; sourceTree = "<group>"; };
 		DF79F865131EA7D500F8400B /* libopennurbs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopennurbs.a; path = opennurbs/libopennurbs.a; sourceTree = "<group>"; };
 		DF82B56A115496F4004DB2C2 /* DisplayMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMesh.h; sourceTree = "<group>"; };
 		DF82B56B115496F4004DB2C2 /* DisplayMesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DisplayMesh.mm; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 				DFBFBCC3130AFC8C0036686F /* RhModel.mm */,
 				DF82B58711549743004DB2C2 /* ONModel.h */,
 				DF82B58811549743004DB2C2 /* ONModel.mm */,
+				DF76F936132E9A7D0046F921 /* ScreenBitmap.h */,
+				DF76F937132E9A7D0046F921 /* ScreenBitmap.mm */,
 				DF3AA9BC119C9D5700319022 /* UIColor-RGBA.h */,
 				DF3AA9BD119C9D5700319022 /* UIColor-RGBA.mm */,
 			);
@@ -465,6 +470,7 @@
 				DF3AA9BE119C9D5700319022 /* UIColor-RGBA.mm in Sources */,
 				DF37B3BA1226F3AB00534E7D /* RhModelViewControllerPad.mm in Sources */,
 				DFBFBCC4130AFC8C0036686F /* RhModel.mm in Sources */,
+				DF76F938132E9A7D0046F921 /* ScreenBitmap.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
